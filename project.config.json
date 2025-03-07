@@ -1,0 +1,23 @@
+{
+  "appid": "wx1513c3a56cadda3a",
+  "projectname": "胡哥图片切片工具",
+  "compileType": "miniprogram",
+  "libVersion": "3.4.2",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  }
+}

@@ -1,0 +1,37 @@
+<!-- index.wxml -->
+<view class="container">
+  <!-- 切片选择 -->
+  <view class="section-header">
+    <button 
+      class="btn {{splitType === 4 ? 'active' : ''}}" 
+      bindtap="setSplitType" 
+      data-type="4"
+    >4宫格</button>
+    <button 
+      class="btn {{splitType === 9 ? 'active' : ''}}" 
+      bindtap="setSplitType" 
+      data-type="9"
+    >9宫格</button>
+    <button 
+      class="btn {{splitType === 16 ? 'active' : ''}}" 
+      bindtap="setSplitType" 
+      data-type="16"
+    >16宫格</button>
+  </view>
+
+  <!-- 预览区域 -->
+  <view class="preview">
+    <canvas 
+      style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;" 
+      canvas-id="mainCanvas"
+    ></canvas>
+    <view wx:if="{{!imagePath}}" class="empty-tip">请先选择图片</view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="section-bottom">
+    <button bindtap="chooseImage">相册选图</button>
+    <button bindtap="takePhoto">拍照</button>
+    <button bindtap="saveAllSlices" disabled="{{!imagePath}}">保存切片</button>
+  </view>
+</view>

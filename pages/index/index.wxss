@@ -1,0 +1,54 @@
+/* index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 20rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-around;
+  margin: 20rpx 0;
+}
+
+.section-bottom {
+  display: flex;
+  justify-content: space-around;
+  margin: 20rpx 0;
+}
+
+.preview {
+  flex: 1;
+  border: 2rpx solid #eee;
+  border-radius: 16rpx;
+  overflow: hidden;
+  background: #f8f8f8;
+}
+
+.btn {
+  width: 200rpx;
+  font-size: 28rpx;
+}
+
+.active {
+  background: #07c160;
+  color: white;
+}
+
+/* 空状态提示 */
+.preview:empty::after {
+  content: "请选择图片";
+  color: #999;
+  font-size: 32rpx;
+}
+
+/* 空状态样式 */
+.empty-tip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ccc;
+  font-size: 32rpx;
+}
