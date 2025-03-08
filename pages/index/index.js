@@ -2,14 +2,30 @@
 Page({
   onLoad() {
     this.initCanvas(); // 提前初始化
+    this.initScreenInfo();
   },
   data: {
     splitType: 4,        // 当前分割类型
     imagePath: null,     // 图片路径
     canvasWidth: 300,    // 画布宽度
     canvasHeight: 300,   // 画布高度
-    originalImage: null  // 原始图片数据
+    originalImage: null,  // 原始图片数据
+    screenHeight: 667,   // 默认屏幕高度（单位：px）
+    maxCanvasHeight: 400 // 初始最大高度
   },
+
+    // 初始化屏幕信息
+    initScreenInfo() {
+      const systemInfo = wx.getSystemInfoSync();
+      const screenHeight = systemInfo.windowHeight;
+      const pixelRatio = systemInfo.pixelRatio;
+      
+      // 计算安全区域高度（顶部按钮+底部按钮约占120px）
+      this.setData({
+        screenHeight,
+        maxCanvasHeight: (screenHeight - 120) * pixelRatio
+      });
+    },
 
   // 初始化画布
   initCanvas() {
@@ -47,23 +63,33 @@ Page({
   async handleImage(path) {
     wx.showLoading({ title: '加载中...' });
     
-    // 获取图片信息
-    const { width, height } = await this.getImageInfo(path);
-    const ratio = width / height;
-    const canvasWidth = 300;
-    const canvasHeight = canvasWidth / ratio;
+    try {
+      const { width, height } = await this.getImageInfo(path);
+      const ratio = width / height;
+      
+      // 动态计算画布尺寸
+      let canvasWidth = 300; // 基础宽度
+      let canvasHeight = canvasWidth / ratio;
 
-    // 存储原始数据
-    this.setData({
-      imagePath: path,
-      canvasWidth,
-      canvasHeight,
-      originalImage: { width, height, path }
-    }, () => {
-      this.initCanvas();
-      this.drawPreview();
+      // 限制最大高度
+      if (canvasHeight > this.data.maxCanvasHeight) {
+        canvasHeight = this.data.maxCanvasHeight;
+        canvasWidth = canvasHeight * ratio;
+      }
+
+      this.setData({
+        imagePath: path,
+        canvasWidth,
+        canvasHeight
+      }, () => {
+        this.drawPreview();
+        wx.hideLoading();
+      });
+
+    } catch (error) {
+      console.error('图片加载失败:', error);
       wx.hideLoading();
-    });
+    }
   },
 
   // 绘制预览（带参考线）

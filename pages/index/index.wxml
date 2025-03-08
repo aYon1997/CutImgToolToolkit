@@ -19,14 +19,20 @@
     >16宫格</button>
   </view>
 
-  <!-- 预览区域 -->
-  <view class="preview">
-    <canvas 
-      style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;" 
-      canvas-id="mainCanvas"
-    ></canvas>
-    <view wx:if="{{!imagePath}}" class="empty-tip">请先选择图片</view>
-  </view>
+  <!-- 可滚动预览区 -->
+  <scroll-view 
+    class="preview-container" 
+    scroll-y 
+    style="height: {{screenHeight - 120}}px"
+  >
+    <view class="preview">
+      <canvas 
+        style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;" 
+        canvas-id="mainCanvas"
+      ></canvas>
+      <view wx:if="{{!imagePath}}" class="empty-tip">请先选择图片</view>
+    </view>
+  </scroll-view>
 
   <!-- 操作按钮 -->
   <view class="section-bottom">

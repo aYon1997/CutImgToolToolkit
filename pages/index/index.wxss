@@ -4,6 +4,7 @@
   flex-direction: column;
   height: 100vh;
   padding: 20rpx;
+  padding-bottom: 180rpx;
 }
 
 .section-header {
@@ -14,15 +15,18 @@
 
 .section-bottom {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin: 20rpx 0;
+  position: fixed;
+  bottom: 20rpx;
+  margin: auto;
 }
 
 .preview {
   flex: 1;
   border: 2rpx solid #eee;
   border-radius: 16rpx;
-  overflow: hidden;
+  overflow: auto;
   background: #f8f8f8;
 }
 
@@ -51,4 +55,23 @@
   transform: translate(-50%, -50%);
   color: #ccc;
   font-size: 32rpx;
+}
+
+/* 确保容器正确布局 */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.preview-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.preview {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx;
+  min-height: 300rpx;
 }
